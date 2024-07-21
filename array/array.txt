@@ -1,0 +1,492 @@
+Preparing for FAANG companies involves mastering both the basics and advanced topics in Data Structures and Algorithms (DSA). The Standard Template Library (STL) in C++ provides a powerful set of tools that are extremely useful for competitive programming, particularly for array-related problems. Here are some important STL algorithms and functions you should focus on:
+
+### 1. **Sorting Algorithms**
+- `std::sort(begin, end)`: Efficiently sorts the elements in the range.
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+int main() {
+    std::vector<int> vec = {3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5};
+    
+    std::sort(vec.begin(), vec.end());
+    
+    std::cout << "Sorted: "; // Sorted: 1 1 2 3 3 4 5 5 5 6 9 
+    for (int v : vec) std::cout << v << " ";
+    std::cout << std::endl;
+
+    return 0;
+}
+
+
+- `std::stable_sort(begin, end)`: Sorts the elements while maintaining the relative order of equal elements.
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+int main() {
+    std::vector<std::pair<int, char>> vec = {{1, 'b'}, {3, 'a'}, {2, 'c'}, {1, 'a'}, {2, 'b'}};
+    
+    std::stable_sort(vec.begin(), vec.end());
+    
+    std::cout << "Stable Sorted: "; // Stable Sorted: (1, b) (1, a) (2, c) (2, b) (3, a) 
+    for (auto &p : vec) std::cout << "(" << p.first << ", " << p.second << ") ";
+    std::cout << std::endl;
+
+    return 0;
+}
+
+- `std::partial_sort(begin, middle, end)`: Partially sorts elements, ensuring that the elements before `middle` are sorted.
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+int main() {
+    std::vector<int> vec = {3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5};
+    
+    std::partial_sort(vec.begin(), vec.begin() + 5, vec.end());
+    
+    std::cout << "Partially Sorted: "; // Partially Sorted: 1 1 2 3 3 9 5 6 5 4 5 
+    for (int v : vec) std::cout << v << " ";
+    std::cout << std::endl;
+
+    return 0;
+}
+
+- `std::nth_element(begin, nth, end)`: Rearranges the elements so that the element at the `nth` position is the one that would be in that position in a fully sorted array.
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+int main() {
+    std::vector<int> vec = {3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5};
+    
+    std::partial_sort(vec.begin(), vec.begin() + 5, vec.end());
+    
+    std::cout << "Partially Sorted: "; // Partially Sorted: 1 1 2 3 3 9 5 6 5 4 5 
+    for (int v : vec) std::cout << v << " ";
+    std::cout << std::endl;
+
+    return 0;
+}
+
+### 2. **Searching Algorithms**
+- `std::binary_search(begin, end, value)`: Checks if a value exists in a sorted array.
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+int main() {
+    std::vector<int> vec = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+    
+    bool found = std::binary_search(vec.begin(), vec.end(), 5);
+    std::cout << "5 found: " << (found ? "Yes" : "No") << std::endl; // 5 found: Yes
+
+    return 0;
+}
+
+- `std::lower_bound(begin, end, value)`: Finds the first position where `value` can be inserted without violating order.
+
+- `std::upper_bound(begin, end, value)`: Finds the position just after the last occurrence of `value`.#include <iostream>
+#include <vector>
+#include <algorithm>
+
+int main() {
+    std::vector<int> vec = {1, 2, 3, 3, 3, 4, 5, 6};
+    
+    auto lb = std::lower_bound(vec.begin(), vec.end(), 3);
+    auto ub = std::upper_bound(vec.begin(), vec.end(), 3);
+    
+    std::cout << "Lower bound of 3: " << (lb - vec.begin()) << std::endl; // Lower bound of 3: 2
+    std::cout << "Upper bound of 3: " << (ub - vec.begin()) << std::endl; // Upper bound of 3: 5
+
+    return 0;
+}
+
+- `std::equal_range(begin, end, value)`: Returns a pair of iterators with the bounds of the range of `value`.
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+int main() {
+    std::vector<int> vec = {1, 2, 3, 3, 3, 4, 5, 6};
+    
+    auto range = std::equal_range(vec.begin(), vec.end(), 3);
+    
+    std::cout << "Equal range of 3: [" << (range.first - vec.begin()) << ", " << (range.second - vec.begin()) << ")" << std::endl; // Equal range of 3: [2, 5)
+
+    return 0;
+}
+
+### 3. **Utility Functions**
+- `std::max_element(begin, end)`: Finds the largest element in the range.
+
+- `std::min_element(begin, end)`: Finds the smallest element in the range.
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+int main() {
+    std::vector<int> vec = {3, 1, 4, 1, 5, 9, 2, 6, 5};
+    
+    auto max_it = std::max_element(vec.begin(), vec.end());
+    auto min_it = std::min_element(vec.begin(), vec.end());
+    
+    std::cout << "Max element: " << *max_it << std::endl; // Max element: 9
+    std::cout << "Min element: " << *min_it << std::endl; // Min element: 1
+
+    return 0;
+}
+
+- `std::minmax_element(begin, end)`: Finds both the smallest and largest elements in the range.
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+int main() {
+    std::vector<int> vec = {3, 1, 4, 1, 5, 9, 2, 6, 5};
+    
+    auto result = std::minmax_element(vec.begin(), vec.end());
+    
+    std::cout << "Min element: " << *result.first << std::endl; // Min element: 1
+    std::cout << "Max element: " << *result.second << std::endl; // Max element: 9
+
+    return 0;
+}
+
+### 4. **Modification Operations**
+- `std::reverse(begin, end)`: Reverses the elements in the range.
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+int main() {
+    std::vector<int> vec = {3, 1, 4, 1, 5, 9};
+    
+    std::reverse(vec.begin(), vec.end());
+    
+    std::cout << "Reversed: "; // Reversed: 9 5 1 4 1 3 
+    for (int v : vec) std::cout << v << " ";
+    std::cout << std::endl;
+
+    return 0;
+}
+
+- `std::rotate(begin, middle, end)`: Rotates the elements such that the element at `middle` comes to the front.
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+int main() {
+    std::vector<int> vec = {1, 2, 3, 4, 5, 6, 7};
+    
+    std::rotate(vec.begin(), vec.begin() + 3, vec.end());
+    
+    std::cout << "Rotated: "; // Rotated: 4 5 6 7 1 2 3 
+    for (int v : vec) std::cout << v << " ";
+    std::cout << std::endl;
+
+    return 0;
+}
+
+- `std::next_permutation(begin, end)`: Transforms the range to the next lexicographical permutation.
+
+- `std::prev_permutation(begin, end)`: Transforms the range to the previous lexicographical permutation.
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+int main() {
+    std::vector<int> vec = {1, 2, 3};
+    
+    std::next_permutation(vec.begin(), vec.end());
+    std::cout << "Next permutation: "; // Next permutation: 1 3 2 
+    for (int v : vec) std::cout << v << " ";
+    std::cout << std::endl;
+
+    std::prev_permutation(vec.begin(), vec.end());
+    std::cout << "Previous permutation: "; // Previous permutation: 1 2 3 
+    for (int v : vec) std::cout << v << " ";
+    std::cout << std::endl;
+
+    return 0;
+}
+
+### 5. **Partitioning**
+- `std::partition(begin, end, predicate)`: Reorders the elements so that all elements satisfying the predicate come before the others.
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+int main() {
+    std::vector<int> vec = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+    
+    std::partition(vec.begin(), vec.end(), [](int x) { return x % 2 == 0; });
+    
+    std::cout << "Partitioned (even first): "; // Partitioned (even first): 2 4 6 8 5 7 3 1 9 
+    for (int v : vec) std::cout << v << " ";
+    std::cout << std::endl;
+
+    return 0;
+}
+
+- `std::stable_partition(begin, end, predicate)`: Does the same as `std::partition` but maintains relative order.
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+int main() {
+    std::vector<int> vec = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+    
+    std::stable_partition(vec.begin(), vec.end(), [](int x) { return x % 2 == 0; });
+    
+    std::cout << "Stable Partitioned (even first): "; // Stable Partitioned (even first): 2 4 6 8 1 3 5 7 9 
+    for (int v : vec) std::cout << v << " ";
+    std::cout << std::endl;
+
+    return 0;
+}
+
+### 6. **Accumulate and Reduce**
+- `std::accumulate(begin, end, initial_value)`: Sums up the elements in the range.
+#include <iostream>
+#include <vector>
+#include <numeric>
+
+int main() {
+    std::vector<int> vec = {1, 2, 3, 4, 5};
+    
+    int sum = std::accumulate(vec.begin(), vec.end(), 0);
+    std::cout << "Sum: " << sum << std::endl; // Sum: 15
+
+    return 0;
+}
+- `std::reduce(begin, end, initial_value)`: Performs a reduction operation (can be parallelized).
+
+#include <iostream>
+#include <vector>
+#include <numeric>
+#include <execution>
+
+int main() {
+    std::vector<int> vec = {1, 2, 3, 4, 5};
+    
+    int sum = std::reduce(std::execution::seq, vec.begin(), vec.end(), 0);
+    std::cout << "Sum using reduce: " << sum << std::endl; // Sum using reduce: 15
+
+    return 0;
+}
+
+
+
+### 7. **Unique and Remove**
+- `std::unique(begin, end)`: Removes consecutive duplicate elements (doesn't change the size of the container).
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+int main() {
+    std::vector<int> vec = {1, 1, 2, 2, 3, 3, 4, 4};
+    
+    auto it = std::unique(vec.begin(), vec.end());
+    vec.resize(std::distance(vec.begin(), it));
+    
+    std::cout << "Unique: "; // Unique: 1 2 3 4 
+    for (int v : vec) std::cout << v << " ";
+    std::cout << std::endl;
+
+    return 0;
+}
+
+- `std::remove(begin, end, value)`: Removes all occurrences of `value` (doesn't change the size of the container).
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+int main() {
+    std::vector<int> vec = {1, 2, 3, 4, 5, 2, 2, 6};
+    
+    auto it = std::remove(vec.begin(), vec.end(), 2);
+    vec.erase(it, vec.end());
+    
+    std::cout << "After removing 2s: "; // After removing 2s: 1 3 4 5 6 
+    for (int v : vec) std::cout << v << " ";
+    std::cout << std::endl;
+
+    return 0;
+}
+
+### 8. **Transformations**
+- `std::transform(begin1, end1, begin2, function)`: Applies a function to a range of elements and stores the result in another range.
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+int main() {
+    std::vector<int> vec = {1, 2, 3, 4, 5};
+    std::vector<int> result(vec.size());
+    
+    std::transform(vec.begin(), vec.end(), result.begin(), [](int x) { return x * x; });
+    
+    std::cout << "Transformed (squares): "; // Transformed (squares): 1 4 9 16 25 
+    for (int v : result) std::cout << v << " ";
+    std::cout << std::endl;
+
+    return 0;
+}
+
+### 9. **Set Operations**
+- `std::set_union(begin1, end1, begin2, end2, result)`: Computes the union of two sorted ranges.
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+int main() {
+    std::vector<int> vec1 = {1, 2, 3, 4};
+    std::vector<int> vec2 = {3, 4, 5, 6};
+    std::vector<int> result;
+    
+    std::set_union(vec1.begin(), vec1.end(), vec2.begin(), vec2.end(), std::back_inserter(result));
+    
+    std::cout << "Union: "; // Union: 1 2 3 4 5 6 
+    for (int v : result) std::cout << v << " ";
+    std::cout << std::endl;
+
+    return 0;
+}
+
+- `std::set_intersection(begin1, end1, begin2, end2, result)`: Computes the intersection of two sorted ranges.
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+int main() {
+    std::vector<int> vec1 = {1, 2, 3, 4};
+    std::vector<int> vec2 = {3, 4, 5, 6};
+    std::vector<int> result;
+    
+    std::set_intersection(vec1.begin(), vec1.end(), vec2.begin(), vec2.end(), std::back_inserter(result));
+    
+    std::cout << "Intersection: "; // Intersection: 3 4 
+    for (int v : result) std::cout << v << " ";
+    std::cout << std::endl;
+
+    return 0;
+}
+
+- `std::set_difference(begin1, end1, begin2, end2, result)`: Computes the difference of two sorted ranges.
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+int main() {
+    std::vector<int> vec1 = {1, 2, 3, 4};
+    std::vector<int> vec2 = {3, 4, 5, 6};
+    std::vector<int> result;
+    
+    std::set_difference(vec1.begin(), vec1.end(), vec2.begin(), vec2.end(), std::back_inserter(result));
+    
+    std::cout << "Difference: "; // Difference: 1 2 
+    for (int v : result) std::cout << v << " ";
+    std::cout << std::endl;
+
+    return 0;
+}
+
+- `std::set_symmetric_difference(begin1, end1, begin2, end2, result)`: Computes the symmetric difference of two sorted ranges.
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+int main() {
+    std::vector<int> vec1 = {1, 2, 3, 4};
+    std::vector<int> vec2 = {3, 4, 5, 6};
+    std::vector<int> result;
+    
+    std::set_symmetric_difference(vec1.begin(), vec1.end(), vec2.begin(), vec2.end(), std::back_inserter(result));
+    
+    std::cout << "Symmetric Difference: "; // Symmetric Difference: 1 2 5 6 
+    for (int v : result) std::cout << v << " ";
+    std::cout << std::endl;
+
+    return 0;
+}
+
+### 10. **Heap Operations**
+- `std::make_heap(begin, end)`: Converts a range into a heap.
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+int main() {
+    std::vector<int> vec = {3, 1, 4, 1, 5, 9, 2, 6, 5};
+    
+    std::make_heap(vec.begin(), vec.end());
+    
+    std::cout << "Heap: "; // Heap: 9 6 5 5 1 4 2 1 3 
+    for (int v : vec) std::cout << v << " ";
+    std::cout << std::endl;
+
+    return 0;
+}
+
+- `std::push_heap(begin, end)`: Adds an element to the heap.
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+int main() {
+    std::vector<int> vec = {3, 1, 4, 1, 5, 9, 2, 6, 5};
+    
+    std::make_heap(vec.begin(), vec.end());
+    vec.push_back(7);
+    std::push_heap(vec.begin(), vec.end());
+    
+    std::cout << "Heap after push: "; // Heap after push: 9 7 5 5 6 4 2 1 3 1 
+    for (int v : vec) std::cout << v << " ";
+    std::cout << std::endl;
+
+    return 0;
+}
+
+- `std::pop_heap(begin, end)`: Removes the largest element from the heap.
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+int main() {
+    std::vector<int> vec = {3, 1, 4, 1, 5, 9, 2, 6, 5};
+    
+    std::make_heap(vec.begin(), vec.end());
+    std::pop_heap(vec.begin(), vec.end());
+    vec.pop_back();
+    
+    std::cout << "Heap after pop: "; // Heap after pop: 6 5 5 3 1 4 2 1 
+    for (int v : vec) std::cout << v << " ";
+    std::cout << std::endl;
+
+    return 0;
+}
+
+- `std::sort_heap(begin, end)`: Sorts a heap.
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+int main() {
+    std::vector<int> vec = {3, 1, 4, 1, 5, 9, 2, 6, 5};
+    
+    std::make_heap(vec.begin(), vec.end());
+    std::sort_heap(vec.begin(), vec.end());
+    
+    std::cout << "Sorted heap: "; // Sorted heap: 1 1 2 3 4 5 5 6 9 
+    for (int v : vec) std::cout << v << " ";
+    std::cout << std::endl;
+
+    return 0;
+}
+
+
+
+
