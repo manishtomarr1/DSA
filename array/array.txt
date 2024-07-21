@@ -1,6 +1,5 @@
-Preparing for FAANG companies involves mastering both the basics and advanced topics in Data Structures and Algorithms (DSA). The Standard Template Library (STL) in C++ provides a powerful set of tools that are extremely useful for competitive programming, particularly for array-related problems. Here are some important STL algorithms and functions you should focus on:
 
-### 1. **Sorting Algorithms**
+ 1. Sorting Algorithms
 - `std::sort(begin, end)`: Efficiently sorts the elements in the range.
 
 #include <iostream>
